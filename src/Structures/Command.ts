@@ -2,7 +2,7 @@ import Discord from 'discord.js';
 
 import Client from './Client';
 
-enum CommandType {
+export enum CommandType {
   BOTH = 'BOTH',
   SLASH = 'SLASH',
   TEXT = 'TEXT',
