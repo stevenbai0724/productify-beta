@@ -1,4 +1,4 @@
-import Client from './Structures/Client.js';
+import Client from './Structures/Client';
 import dotenv from 'dotenv';
 dotenv.config();
 

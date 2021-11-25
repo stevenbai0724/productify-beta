@@ -25,4 +25,4 @@ const InteractionCreate = new Event('interactionCreate', (client, interaction) =
   command.run(interaction, args, client);
 });
 
-export default InteractionCreate;
+module.exports = InteractionCreate;

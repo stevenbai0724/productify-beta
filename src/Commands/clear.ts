@@ -1,4 +1,5 @@
 import { TextChannel } from 'discord.js';
+import Client from '../Structures/Client';
 
 import Command, { CommandType } from '../Structures/Command';
 
@@ -28,10 +29,11 @@ const Clear = new Command({
 
     await channel.bulkDelete(amount);
 
-    const msg = await message.reply(`Cleared ${amount} messages!`);
-
-    setTimeout(() => msg?.delete(), 5000);
+    try {
+      const msg = await message.reply(`Cleared ${amount} messages!`);
+      setTimeout(() => msg?.delete(), 5000);
+    } catch(err) {}
   },
 });
 
-export default Clear;
+module.exports = Clear;

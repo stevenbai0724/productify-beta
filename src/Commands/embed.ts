@@ -26,4 +26,4 @@ const Embed = new Command({
   },
 });
 
-export default Embed;
+module.exports = Embed;

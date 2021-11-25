@@ -18,4 +18,4 @@ const Ping = new Command({
   },
 });
 
-export default Ping;
+module.exports = Ping;

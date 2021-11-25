@@ -22,4 +22,4 @@ const MessageCreate = new Event('messageCreate', (client, message) => {
   command.run(message, args, client);
 });
 
-export default MessageCreate;
+module.exports = MessageCreate;
