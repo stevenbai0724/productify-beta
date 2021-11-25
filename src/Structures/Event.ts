@@ -4,7 +4,7 @@ import Client from './Client';
 
 type runFunction<K extends keyof Discord.ClientEvents> = (
   client: Client,
-  ...eventArgs: Discord.ClientEvents[K][]
+  ...eventArgs: Discord.ClientEvents[K]
 ) => void;
 
 class Event<K extends keyof Discord.ClientEvents> {

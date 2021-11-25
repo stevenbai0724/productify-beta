@@ -27,7 +27,7 @@ class Client extends Discord.Client {
       .forEach((file) => {
         const eventObj : Event<keyof Discord.ClientEvents> = require(`../Events/${file}`);
         console.log(`Event ${eventObj.event} loaded`);
-        this.on(eventObj.event as string, eventObj.run.bind(null, this));
+        this.on(eventObj.event, eventObj.run.bind(null, this));
       });
 
     // Initializing text commands

@@ -1,4 +1,4 @@
-import Discord, { Message } from 'discord.js';
+import Discord from 'discord.js';
 
 import Command, { CommandType } from '../Structures/Command';
 
@@ -17,3 +17,5 @@ const Ping = new Command({
     msg.edit(`Ping: ${client.ws.ping} ms.\n Message Ping: ${msg.createdTimestamp - message.createdTimestamp}`);
   },
 });
+
+export default Ping;
