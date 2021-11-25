@@ -7,7 +7,7 @@ dotenv.config();
 import Command from './Command';
 import Event from './Event';
 
-const intents = new Discord.Intents(['GUILDS', 'GUILD_MESSAGES']);
+const intents = new Discord.Intents(['GUILDS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_REACTIONS']);
 
 class Client extends Discord.Client {
   commands: Discord.Collection<string, Command>;

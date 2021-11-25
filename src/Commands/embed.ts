@@ -17,7 +17,7 @@ const Embed = new Command({
       .setTitle('Test Embed')
       .setURL('https://prepanywhere.com')
       .setAuthor(user.username, <string>user.avatarURL({ dynamic: true }), 'https://prepanywhere.com')
-      .setDescription('This is some plain text,\n Link: [test](https://prepanywhere.com)')
+      .setDescription('Hurricane Twister is cool uwu \:smile:,\n Link: [test](https://prepanywhere.com)')
       .setColor('BLURPLE')
       .setThumbnail(<string>user.avatarURL({ dynamic: true }))
       .setTimestamp();
