@@ -1,6 +1,7 @@
 import fs from 'fs';
 
 import Discord from 'discord.js';
+import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 dotenv.config();
 
@@ -11,7 +12,7 @@ const intents = new Discord.Intents(['GUILDS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_
 
 class Client extends Discord.Client {
   commands: Discord.Collection<string, Command>;
-  prefix: string;
+  readonly prefix: string;
 
   constructor() {
     super({ intents });
@@ -44,8 +45,17 @@ class Client extends Discord.Client {
 
     // Ready event
     this.on('ready', async () => {
+      try {
+        await mongoose.connect(<string>process.env.MONGOOSE_URI,);
+        console.log('Successfully connected to MongoDB!')
+      } catch (err) {
+        console.log('Unable to connect to DB:', err);
+      }
+
       const guild = this.guilds.cache.get(process.env.GUILD_ID ?? '');
-      const cmds = guild ? await guild.commands.set(slashCommands) : await this.application?.commands.set(slashCommands);
+      const cmds = guild
+        ? await guild.commands.set(slashCommands)
+        : await this.application?.commands.set(slashCommands);
 
       cmds?.forEach((cmd) => console.log(`Slash Command ${cmd.name} registered`));
     });
