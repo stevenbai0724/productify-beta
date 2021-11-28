@@ -48,7 +48,7 @@ const Goals = new Event('messageCreate', async (client, message) => {
     .then((res: quote) => {
       const motivationChannel = client.channels.cache.find((c) => c.id == '913350444489773097');
       if (motivationChannel && motivationChannel.isText()) {
-        motivationChannel.send(`<@${authorId}> You're on a ${user?.goalsStreak} day streak!\n${res.q} -${res.a}`);
+        motivationChannel.send(`<@${authorId}> You're on a ${user?.goalsStreak} day streak 🔥\n${res.q} -${res.a}`);
       } else {
         console.log('Unable to send message to user in motivation channel');
       }

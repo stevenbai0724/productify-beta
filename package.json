@@ -1,12 +1,16 @@
 {
   "name": "productify-alpha-bot",
   "version": "1.0.0",
+  "engines": {
+    "node": "16.x"
+  },
   "description": "",
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc -w --skipLibCheck",
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "start": "nodemon src/index.ts"
   },
   "author": "",
   "license": "ISC",
