@@ -1,5 +1,4 @@
 import { TextChannel } from 'discord.js';
-import Client from '../Structures/Client';
 
 import Command, { CommandType } from '../Structures/Command';
 

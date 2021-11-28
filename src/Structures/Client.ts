@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 import Discord from 'discord.js';
 import mongoose from 'mongoose';
@@ -22,7 +23,9 @@ class Client extends Discord.Client {
 
   start(token: string) {
     // Initializing text commands
-    const commandFiles = fs.readdirSync('./src/Commands').filter((file) => /^.+(\.ts|\.js)$/.test(file));
+    const commandFiles = fs
+      .readdirSync(path.join(__dirname, '..', 'Commands'))
+      .filter((file) => /^.+(\.ts|\.js)$/.test(file));
     const commands: Command[] = commandFiles.map((file) => require(`../Commands/${file}`));
 
     commands.forEach((cmd) => {
@@ -46,8 +49,8 @@ class Client extends Discord.Client {
     // Ready event
     this.on('ready', async () => {
       try {
-        await mongoose.connect(<string>process.env.MONGOOSE_URI,);
-        console.log('Successfully connected to MongoDB!')
+        await mongoose.connect(<string>process.env.MONGOOSE_URI);
+        console.log('Successfully connected to MongoDB!');
       } catch (err) {
         console.log('Unable to connect to DB:', err);
       }
@@ -61,7 +64,7 @@ class Client extends Discord.Client {
     });
 
     // Initialization events
-    fs.readdirSync('./src/Events')
+    fs.readdirSync(path.join(__dirname, '..', 'Events'))
       .filter((file) => /^.+(\.ts|\.js)$/.test(file))
       .forEach((file) => {
         const eventObj: Event<keyof Discord.ClientEvents> = require(`../Events/${file}`);
