@@ -4,7 +4,7 @@ import Command, { CommandType } from '../Structures/Command';
 
 const startTimer = new Command({
   name: 'start-timer',
-  description: 'Starts a 25/5 pomodoro timer in the given channel',
+  description: 'Starts a 25/5 pomodoro timer in this channel',
   type: CommandType.SLASH,
   slashCommandOptions: [],
   permission: 'SEND_MESSAGES',
@@ -26,8 +26,8 @@ const startTimer = new Command({
       .setTitle('Study time!')
       .setDescription(
         `<@&${roleId}> I hope you enjoyed your break! But your homework isn't going to do itself <:PandaUWU:908492211820302377>\n
-        Let's get that bread <:PandaCapitalist:908492210696224839>\n•\n•\n•\n
-        To be added to Pomodoro role, react to the pinned message in this channel! <:PandaLove:908492212659191888> <:PandaLove:908492212659191888>`
+        Let's get that bread <:PandaCapitalist:908492210696224839>\n•\n•\n•
+        To be added to the Pomodoro role, react to the pinned message in this channel! <:PandaLove:908492212659191888> <:PandaLove:908492212659191888>`
       )
       .setColor('AQUA')
       .setAuthor(sender.username, <string>sender.defaultAvatarURL, 'https://prepanywhere.com')

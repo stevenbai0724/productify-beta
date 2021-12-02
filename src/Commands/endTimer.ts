@@ -4,7 +4,7 @@ import Command, { CommandType } from '../Structures/Command';
 
 const endTimer = new Command({
   name: 'end-timer',
-  description: 'Ends a 25/5 pomodoro timer in the given channel',
+  description: 'Ends a 25/5 pomodoro timer in this channel',
   type: CommandType.SLASH,
   slashCommandOptions: [],
   permission: 'SEND_MESSAGES',
