@@ -13,11 +13,13 @@ const intents = new Discord.Intents(['GUILDS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_
 
 class Client extends Discord.Client {
   commands: Discord.Collection<string, Command>;
+  timers: Discord.Collection<string, NodeJS.Timer>
   readonly prefix: string;
 
   constructor() {
     super({ intents });
     this.commands = new Discord.Collection();
+    this.timers = new Discord.Collection();
     this.prefix = process.env.PREFIX!;
   }
 
