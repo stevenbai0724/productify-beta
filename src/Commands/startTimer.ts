@@ -26,8 +26,8 @@ const startTimer = new Command({
       .setTitle('Time for work!')
       .setDescription(
         `<@&${roleId}> I hope you enjoyed your break! But your homework isn't going to do itself <:PandaUWU:908492211820302377>\n
-        Let's get that bread <:PandaCapitalist:908492210696224839>\n\n
-        To get added to Pomodoro role, react to the pinned message in this channel! <:PandaLove:908492212659191888> <:PandaLove:908492212659191888>`
+        Let's get that bread <:PandaCapitalist:908492210696224839>\n•\n•\n•\n
+        To be added to Pomodoro role, react to the pinned message in this channel! <:PandaLove:908492212659191888> <:PandaLove:908492212659191888>`
       )
       .setColor('AQUA')
       .setAuthor(sender.username, <string>sender.defaultAvatarURL, 'https://prepanywhere.com')
@@ -48,17 +48,18 @@ const startTimer = new Command({
     const intervalTimer = setInterval(() => {
       const d = new Date();
       const m = d.getMinutes();
+      const s = d.getSeconds();
 
       //return to work at 0th and 30th minute of every hour (once)
-      if (m == 0 || m == 30) {
+      if ((m == 0 || m == 30) && (s >= 0 && s <= 9)) {
         channel.send({ embeds: [embedWork.setTimestamp()] });
       }
       //break at 25th and 55h minutes of every hour (once)
-      if (m == 25 || m == 55) {
+      if ((m == 25 || m == 55) && s >= 0 && s <= 9) {
         //extra 2 seconds compensates for discord / setInterval not syncing exactly
         channel.send({ embeds: [embedBreak.setTimestamp()] });
       }
-    }, 60000);
+    }, 10000);
 
     client.timers.set(channel.id, intervalTimer);
     return message.reply({ content: 'Timer successfully added!', ephemeral: true });
