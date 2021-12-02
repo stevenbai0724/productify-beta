@@ -13,11 +13,13 @@ const intents = new Discord.Intents(['GUILDS', 'GUILD_MESSAGES', 'GUILD_MESSAGE_
 
 class Client extends Discord.Client {
   commands: Discord.Collection<string, Command>;
+  timers: Discord.Collection<string, NodeJS.Timer>
   readonly prefix: string;
 
   constructor() {
     super({ intents });
     this.commands = new Discord.Collection();
+    this.timers = new Discord.Collection();
     this.prefix = process.env.PREFIX!;
   }
 
@@ -61,53 +63,6 @@ class Client extends Discord.Client {
         : await this.application?.commands.set(slashCommands);
 
       cmds?.forEach((cmd) => console.log(`Slash Command ${cmd.name} registered`));
-
-      
-      //INSERT RESPECTIVE ID'S 
-      const roleId = "875135862214631424"; //role to ping every message send
-      const channelId = "914245735829098506"; //channel to send periodic messages to
-      const botId = "913587144805711892"; // ID of the bot sending periodic messages (productify)
-
-
-      let channel = this.channels.cache.find(c => c.id === channelId) as Discord.TextChannel; 
-      let sender = this.users.cache.find(user => user.id === `${botId}`) as Discord.User
-
-      setInterval(() => {
-        var d = new Date();
-        var m = d.getMinutes();
-        var s = d.getSeconds();
-        const embedWork = new Discord.MessageEmbed();
-        const embedBreak = new Discord.MessageEmbed();
-        
-        //embeded work message reminder
-        embedWork
-        .setTitle('Go to work!')
-        .setDescription(`<@&${roleId}> your 5 minute break is over. Please remove all your distractions for the next 25 minutes and get to work. You can do it!`)
-        .setColor('AQUA')
-        .setAuthor(sender.username, <string>sender.defaultAvatarURL, 'https://prepanywhere.com')
-        .setThumbnail("https://media.discordapp.net/attachments/802250402074591246/915062747069288478/worktime.png")
-        .setTimestamp()
-
-        //embeded break message reminder
-        embedBreak
-        .setTitle('Break time!')
-        .setAuthor(sender.username, <string>sender.defaultAvatarURL, 'https://prepanywhere.com')
-        .setDescription(`<@&${roleId}> you now have a 5 minute break for some mild relaxation. Please get up, stretch, and get some food/water. See you in 5 minutes. Great work!`)
-        .setColor('RED')
-        .setThumbnail("https://media.discordapp.net/attachments/802250402074591246/915062511022252032/breaktime.png")
-        .setTimestamp();
-        
-
-        //return to work at 0th and 30th minute of every hour (once)
-        if( (m == 0 || m == 30) && s == 2){
-          channel.send({ embeds: [embedWork] });
-        }
-        //break at 25th and 55h minutes of every hour (once)
-        if( (m == 25 || m == 55) && s == 2){  //extra 2 seconds compensates for discord / setInterval not syncing exactly 
-          channel.send({ embeds: [embedBreak] });
-        }
-
-      },1000)
     });
 
     // Initialization events
