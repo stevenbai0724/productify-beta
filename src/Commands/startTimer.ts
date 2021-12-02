@@ -23,7 +23,7 @@ const startTimer = new Command({
 
     //embeded work message reminder
     embedWork
-      .setTitle('Time for work!')
+      .setTitle('Study time!')
       .setDescription(
         `<@&${roleId}> I hope you enjoyed your break! But your homework isn't going to do itself <:PandaUWU:908492211820302377>\n
         Let's get that bread <:PandaCapitalist:908492210696224839>\n•\n•\n•\n
