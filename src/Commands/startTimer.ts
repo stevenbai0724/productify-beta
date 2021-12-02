@@ -11,6 +11,10 @@ const startTimer = new Command({
   run: async (message, args, client) => {
     const roleId = '915889536855326720';
 
+    if (client.timers.get(message.channelId)) {
+      return message.reply({ content: 'A timer for this channel already exists!', ephemeral: true });
+    }
+
     const channel = message.channel as Discord.TextBasedChannels;
     const sender = client.users.cache.find((user) => user.id === `${process.env.CLIENT_ID}`) as Discord.User;
 
@@ -27,8 +31,7 @@ const startTimer = new Command({
       )
       .setColor('AQUA')
       .setAuthor(sender.username, <string>sender.defaultAvatarURL, 'https://prepanywhere.com')
-      .setThumbnail('https://media.discordapp.net/attachments/802250402074591246/915062747069288478/worktime.png')
-      .setTimestamp();
+      .setThumbnail('https://media.discordapp.net/attachments/802250402074591246/915062747069288478/worktime.png');
 
     //embeded break message reminder
     embedBreak
@@ -40,8 +43,7 @@ const startTimer = new Command({
         See you in 5 minutes. <:PandaCuteJuice:908492211967111248>`
       )
       .setColor('ORANGE')
-      .setThumbnail('https://media.discordapp.net/attachments/802250402074591246/915062511022252032/breaktime.png')
-      .setTimestamp();
+      .setThumbnail('https://media.discordapp.net/attachments/802250402074591246/915062511022252032/breaktime.png');
 
     const intervalTimer = setInterval(() => {
       const d = new Date();
@@ -49,17 +51,17 @@ const startTimer = new Command({
 
       //return to work at 0th and 30th minute of every hour (once)
       if (m == 0 || m == 30) {
-        channel.send({ embeds: [embedWork] });
+        channel.send({ embeds: [embedWork.setTimestamp()] });
       }
       //break at 25th and 55h minutes of every hour (once)
       if (m == 25 || m == 55) {
         //extra 2 seconds compensates for discord / setInterval not syncing exactly
-        channel.send({ embeds: [embedBreak] });
+        channel.send({ embeds: [embedBreak.setTimestamp()] });
       }
-    }, 6000);
+    }, 60000);
 
     client.timers.set(channel.id, intervalTimer);
-    message.reply({ content: 'Timer successfully added!', ephemeral: true });
+    return message.reply({ content: 'Timer successfully added!', ephemeral: true });
   },
 });
 
